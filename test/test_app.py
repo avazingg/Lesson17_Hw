@@ -15,3 +15,13 @@ def test_divide():
     assert divide(9, 3) == 3
     # with pytest.raises(ValueError):
     #     divide(5, 0)
+
+def test_subtract():
+    assert  subtract(10,5) == 5
+    assert subtract(1230, 198) == 1032
+
+def test_multiply():
+    assert multiply(10, 2) == 20
+    assert multiply(9, 3) == 27
+    assert multiply(11, 11) == 121
+    assert multiply(1, 3) == 3
