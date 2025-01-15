@@ -13,8 +13,9 @@ def test_divide():
     """Тестирует функцию деления."""
     assert divide(10, 2) == 5
     assert divide(9, 3) == 3
-    # with pytest.raises(ValueError):
-    #     divide(5, 0)
+    with pytest.raises(ValueError, match="Деление на ноль невозможно"):
+        divide(1, 0)
+
 
 def test_subtract():
     assert  subtract(10,5) == 5
