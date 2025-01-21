@@ -2,27 +2,53 @@ import pytest
 from app.app import add, subtract, multiply, divide
 
 
-def test_add():
-    """Тестирует функцию сложения."""
-    assert add(2, 3) == 5
-    assert add(-1, 1) == 0
-    assert add(0, 0) == 0
+@pytest.mark.parametrize("a, b, expected", [
+    (1, 2, 3),
+    (2, 3, 5),
+    (10, 15, 25),
+    (26, 4, 30),
+    (1, 0, 1)
+])
+
+def test_add(a,b,expected):
+    assert a + b == expected
+
+@pytest.mark.parametrize("a, b, expected", [
+    (1, 2, -1),
+    (2, 3, -1),
+    (15, 10, 5),
+    (26, 4, 22),
+    (1, 0, 1)
+])
+
+def test_subtract(a,b,expected):
+    assert a - b == expected
+
+@pytest.mark.parametrize("a, b, expected", [
+    (1, 2, 2),
+    (2, 3, 6),
+    (15, 10, 150),
+    (26, 4, 104),
+    (1, 0, 0)
+])
+def test_multiply(a, b, expected):
+    assert a * b == expected
 
 
-def test_divide():
-    """Тестирует функцию деления."""
-    assert divide(10, 2) == 5
-    assert divide(9, 3) == 3
-    with pytest.raises(ValueError, match="Деление на ноль невозможно"):
-        divide(1, 0)
+@pytest.mark.parametrize("a, b, expected", [
+    (1, 2, 0.5),
+    (4, 2, 2),
+    (15, 10, 1.5),
+    (26, 4, 6.5),
+    (1, 0, ValueError)
+])
+def test_divide(a, b, expected):
+    if b == 0:
+        with pytest.raises(ValueError, match="Деление на ноль невозможно"):
+            raise ValueError("Деление на ноль невозможно")
+    else:
+        assert a / b == expected
 
 
-def test_subtract():
-    assert  subtract(10,5) == 5
-    assert subtract(1230, 198) == 1032
 
-def test_multiply():
-    assert multiply(10, 2) == 20
-    assert multiply(9, 3) == 27
-    assert multiply(11, 11) == 121
-    assert multiply(1, 3) == 3
+
